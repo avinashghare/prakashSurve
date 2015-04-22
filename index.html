@@ -26,8 +26,6 @@
     <script src="js/controllers.js"></script>
     <script src="js/jstorage.js"></script>
 
-
-
     <script type="text/javascript">
         var db;
 
@@ -43,24 +41,24 @@
                     projectid: "1064980123221",
                     appid: "E7EBE-A75AC"
                 },
-                function (status) {
+                function(status) {
                     //this is push token
                     var pushToken = status;
                     console.warn('push token: ' + pushToken);
                 },
-                function (status) {
+                function(status) {
                     console.warn(JSON.stringify(['failed to register ', status]));
                 }
             );
 
             //this function gets called when push notifications has been received
-            document.addEventListener('push-notification', function (event) {
+            document.addEventListener('push-notification', function(event) {
                 var title = event.notification.title;
                 var userData = event.notification.userdata;
 
 
 
-                if (typeof (userData) != "undefined") {
+                if (typeof(userData) != "undefined") {
                     console.warn('user data: ' + JSON.stringify(userData));
                 }
 
@@ -80,7 +78,7 @@
             //rest of the code
         }
 
-        document.addEventListener('push-notification', function (event) {
+        document.addEventListener('push-notification', function(event) {
             //event.notification is a JSON push notifications payload
             var title = event.notification.title;
 
@@ -94,14 +92,28 @@
         });
     </script>
 
-
-
 </head>
 
-<body ng-app="starter" >
+<body ng-app="starter">
     <ion-nav-view></ion-nav-view>
 
-
 </body>
+
+<script>
+    var gaPlugin;
+
+    function functionconsole(data) {
+        console.log(data);
+    }
+
+    function sendtoga(text) {
+        if (window.plugins) {
+            if (window.plugins.gaPlugin) {
+                window.plugins.gaPlugin.init(functionconsole, functionconsole, "UA-57383318-1", 10);
+                window.plugins.gaPlugin.trackPage(functionconsole, functionconsole, text);
+            }
+        }
+    }
+</script>
 
 </html>
